@@ -3,12 +3,13 @@ import { usePrisma } from "../../../config/prisma";
 import { Err, Ok } from "../../../helpers/result";
 import createUrl from "./url";
 
-export default async function permUpload(data: string) {
+export default async function permUpload(data: string, type: string) {
   try {
-    const newUrl = createUrl();
+    const newUrl = createUrl({ isPerm: true });
     const image = await usePrisma.image.create({
       data: {
-        data,
+        data: Buffer.from(data, "base64"),
+        type: type,
         reference: { create: { url: newUrl } },
       },
       select: { id: true, reference: { select: { url: true } } },
@@ -22,6 +23,7 @@ export default async function permUpload(data: string) {
       );
     }
 
+    Log.info("Image upload successful");
     return Ok(image.reference.url);
   } catch (err) {
     Log.error(err, "Failed to perm upload image");
