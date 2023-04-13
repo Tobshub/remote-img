@@ -8,7 +8,7 @@ import Log from "./config/logger";
 config();
 
 /** environemnt variables used throughout the app */
-export const env = { port: process.env.PORT ?? 4000 };
+export const env = { port: process.env.PORT ?? 4000, jwtSecret: process.env.JWT_SECRET };
 
 const app = express();
 
