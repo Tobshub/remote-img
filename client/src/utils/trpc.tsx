@@ -4,6 +4,7 @@ import type { AppRouter } from "@server/api/router";
 import { PropsWithChildren } from "react";
 import { Context } from "@server/config/trpc";
 import { serverUrl } from "@/data/url";
+import clientToken from "./token";
 
 /**
  * trpc react handler
@@ -28,7 +29,7 @@ const trpcClient = trpc.createClient({
       headers() {
         return {
           // api token
-          authorization: "",
+          authorization: clientToken.get() ?? undefined,
         };
       },
     }),
