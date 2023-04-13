@@ -4,13 +4,13 @@ const _LOG = pino({ transport: { target: "pino-pretty" } });
 
 /** pino logger wrapper */
 const Log = {
-  info: (obj: any, message?: string, ...args: any[]) =>
+  info: (obj: any, message?: any, ...args: any[]) =>
     _LOG.info(obj, message, ...args),
-  warn: (obj: any, message?: string, ...args: any[]) =>
+  warn: (obj: any, message?: any, ...args: any[]) =>
     _LOG.warn(obj, message, ...args),
-  error: (error: any, message?: string, ...args: any[]) =>
+  error: (error: any, message?: any, ...args: any[]) =>
     _LOG.error(error, message, ...args),
-  debug: (obj: any, message?: string, ...args: any[]) =>
+  debug: (obj: any, message?: any, ...args: any[]) =>
     _LOG.debug(obj, message, ...args),
 };
 
