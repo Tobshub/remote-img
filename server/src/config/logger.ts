@@ -3,7 +3,7 @@ import { pino } from "pino";
 const _LOG = pino({ transport: { target: "pino-pretty" } });
 
 /** pino logger wrapper */
-const LOG = {
+const Log = {
   info: (obj: any, message?: string, ...args: any[]) =>
     _LOG.info(obj, message, ...args),
   warn: (obj: any, message?: string, ...args: any[]) =>
@@ -14,4 +14,4 @@ const LOG = {
     _LOG.debug(obj, message, ...args),
 };
 
-export default LOG;
+export default Log;

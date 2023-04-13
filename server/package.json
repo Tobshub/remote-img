@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "@tobshub/remote-img-server",
   "version": "1.0.0",
   "main": "src/index.ts",
   "license": "MIT",

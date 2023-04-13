@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import LOG from "./logger";
+import Log from "./logger";
 
 /**
  * Prisma Client API
@@ -11,9 +11,10 @@ export const usePrisma = new PrismaClient();
 /** Connect to database with Prisma Client */
 export async function PrismaConn() {
   try {
+    Log.info("Prisma Client Connecting...");
     await usePrisma.$connect();
-    LOG.info("Prisma Client Connected");
+    Log.info("Prisma Client Connected");
   } catch (error) {
-    LOG.error(error, "Error: Prisma couldn't connect to database");
+    Log.error(error, "Error: Prisma couldn't connect to database");
   }
 }
