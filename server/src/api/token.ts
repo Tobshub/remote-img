@@ -3,7 +3,7 @@ import Log from "../config/logger";
 import { Err, Ok } from "../helpers/result";
 import { env } from "../index";
 
-const { jwtSecret } = env;
+const jwtSecret = env?.jwtSecret;
 const appToken = {
   generate: (seed: string) => {
     try {
