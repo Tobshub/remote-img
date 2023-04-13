@@ -6,4 +6,6 @@ export const appRouter = tRouter({
   upload: uploadRouter,
 });
 
+export const appRouterCaller = appRouter.createCaller({ auth: undefined });
+
 export type AppRouter = typeof appRouter;
