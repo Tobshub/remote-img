@@ -2,6 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import appHandler from "./config/api";
 import { PrismaConn } from "./config/prisma";
+import Log from "./config/logger";
 
 // load environment variables
 config();
@@ -13,4 +14,6 @@ const app = express();
 
 appHandler(app);
 
-PrismaConn().then(() => app.listen(env.port));
+PrismaConn().then(() => {
+  app.listen(env.port, () => Log.info(`Live port: ${env.port}`));
+});
