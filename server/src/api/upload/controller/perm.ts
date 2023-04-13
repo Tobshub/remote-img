@@ -25,6 +25,6 @@ export default async function permUpload(data: string) {
     return Ok(image.reference.url);
   } catch (err) {
     Log.error(err, "Failed to perm upload image");
-    return Err("upload failed");
+    return Err("Upload failed");
   }
 }
