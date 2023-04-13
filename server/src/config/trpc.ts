@@ -15,12 +15,14 @@ export const tProcedure = trpc.procedure;
 export const tError = TRPCError;
 
 const AuthMiddleware = trpc.middleware(async ({ ctx, next }) => {
-  if (!ctx.auth) {
-    throw new tError({ code: "UNAUTHORIZED", message: "Please Login or Sign up." });
-  }
-  const isValid = appToken.validate(ctx.auth);
-  if (!isValid.ok) {
-    throw new tError({ code: "UNAUTHORIZED", message: "Please Login again." });
+  if (!ctx.isAuth) {
+    if (!ctx.auth) {
+      throw new tError({ code: "UNAUTHORIZED", message: "Please Login or Sign up." });
+    }
+    const isValid = appToken.validate(ctx.auth);
+    if (!isValid.ok) {
+      throw new tError({ code: "UNAUTHORIZED", message: "Please Login again." });
+    }
   }
   return next({ ctx: { auth: ctx.auth, isAuth: true } });
 });

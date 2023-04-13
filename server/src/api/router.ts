@@ -9,6 +9,6 @@ export const appRouter = tRouter({
   retrieve: retrieveRouter,
 });
 
-export const appRouterCaller = appRouter.createCaller({ auth: undefined });
+export const appRouterCaller = appRouter.createCaller({ auth: undefined, isAuth: true });
 
 export type AppRouter = typeof appRouter;
