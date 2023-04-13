@@ -4,7 +4,7 @@
   "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.ts",
+    "dev": "../bin/dev.sh && nodemon src/index.ts",
     "start": "node dist/index.js",
     "build": "pnpm i && tsc",
     "server:install": "pnpm i && pnpm prisma generate"
