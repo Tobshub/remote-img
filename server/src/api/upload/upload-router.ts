@@ -1,10 +1,10 @@
 import { z } from "zod";
-import { tError, tProcedure, tRouter } from "../../config/trpc";
+import { authProcedure, tError, tProcedure, tRouter } from "../../config/trpc";
 import permUpload from "./controller/perm";
 
 const uploadRouter = tRouter({
   /** Images uploaded this way are stored permanently */
-  permUpload: tProcedure
+  permUpload: authProcedure
     .input(z.object({ data: z.string(), type: z.string().optional().default("image/jpg") }))
     .mutation(async ({ input }) => {
       const res = await permUpload(input.data, input.type);
