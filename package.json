@@ -1,0 +1,15 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "main": ".",
+  "license": "MIT",
+  "scripts": {
+    "dev:client": "cd client && pnpm dev",
+    "dev:server": "cd server && pnpm dev",
+    "dev": "concurrently \"pnpm:dev:*\"",
+    "setup": "pnpm i; cd client && pnpm client:install; cd ../server && pnpm server:install; echo \"You're all set up and ready to start coding\nRun pnpm dev to start both client/ & server/ development servers\""
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
