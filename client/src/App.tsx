@@ -8,6 +8,7 @@ import { TRPCProvider } from "./utils/trpc";
 import AuthPage from "./pages/auth";
 import clientToken from "./utils/token";
 import UploadPage from "./pages/upload";
+import IndexPage from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,7 @@ const router = createBrowserRouter([
     element: <AuthPage />,
   },
   {
-    path: "upload",
-    element: <UploadPage />,
+    path: "/",
     loader: async () => {
       const token = clientToken.get();
       if (!token) {
@@ -24,10 +24,17 @@ const router = createBrowserRouter([
       }
       return token;
     },
+    children: [
+      {
+        path: "upload",
+        element: <UploadPage />,
+      },
+      // TODO: create page to view all images
+    ],
   },
   {
     index: true,
-    element: <>"Index page"</>,
+    element: <IndexPage />,
   },
 ]);
 
