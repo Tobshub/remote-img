@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { tError, tProcedure, tRouter } from "../../config/trpc";
-import { env } from "../../index";
 import appToken from "../token";
+
+const env = { email: process.env.USER_EMAIL, password: process.env.USER_PASSWORD };
 
 const authRouter = tRouter({
   login: tProcedure

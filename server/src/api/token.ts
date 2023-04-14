@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
 import Log from "../config/logger";
 import { Err, Ok } from "../helpers/result";
-import { env } from "../index";
 
-const jwtSecret = env?.jwtSecret;
+const jwtSecret = process.env.JWT_SECRET;
+
 const appToken = {
   generate: (seed: string) => {
     try {
