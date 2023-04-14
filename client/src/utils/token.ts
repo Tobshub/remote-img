@@ -1,4 +1,4 @@
-const tokenName = "remote-img-token";
+const tokenName = "tobsmote-img-token";
 const clientToken = {
   set: (value: string) => {
     localStorage.setItem(tokenName, value);
@@ -12,7 +12,7 @@ const clientToken = {
     const token = localStorage.getItem(tokenName);
     localStorage.removeItem(tokenName);
     return token;
-  }
+  },
 };
 
 export default clientToken;
