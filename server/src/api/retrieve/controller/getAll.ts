@@ -10,7 +10,8 @@ export default async function getAllUrls(options?: { cursor?: string | null; sor
       select: { url: true },
     });
 
-    return Ok(refs)
+    Log.info("Success getting image refs");
+    return Ok(refs);
   } catch (err) {
     Log.error(err, "Failed to get urls");
     return Err("Failed to get image urls");

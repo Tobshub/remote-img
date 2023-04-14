@@ -25,7 +25,10 @@ const retrieveRouter = tRouter({
     .input(z.object({ cursor: z.string().optional().nullable() }))
     .query(async ({ input }) => {
       const res = await getAllUrls({ cursor: input.cursor });
-      if (res.ok) return res;
+      if (res.ok) {
+        (res as any).nextCursor = res.value.at(-1)?.url;
+        return res as typeof res & { nextcursor: string };
+      }
 
       throw new tError({
         code: "INTERNAL_SERVER_ERROR",
