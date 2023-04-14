@@ -30,7 +30,6 @@ const router = createBrowserRouter([
         path: "upload",
         element: <UploadPage />,
       },
-      // TODO: create page to view all images
       {
         path: "images",
         element: <ImagesPage />,
