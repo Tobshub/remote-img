@@ -1,6 +1,7 @@
 import { FormEvent, useRef, useState } from "react";
 import { trpc } from "@/utils/trpc";
 import { serverUrl } from "@/data/url";
+import { Link } from "react-router-dom";
 
 export default function UploadPage() {
   const [responseMsg, setResponseMsg] = useState("");
@@ -44,23 +45,36 @@ export default function UploadPage() {
     reader.readAsDataURL(file);
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input type="file" accept="image/*" ref={imageUploadRef} />
-        </label>
-        <button type="submit">UPLOAD</button>
-        {responseMsg.length ? <p>{responseMsg}</p> : null}
-      </form>
+    <div className="page">
       <div>
-        <ul>
-          Uploads:
-          {uploads.map((url) => (
-            <li key={url}>
-              <img src={`${serverUrl}/img/${url}`} height={100} />
-            </li>
-          ))}
-        </ul>
+        <Link to="/" className="btn btn-primary rounded-0">
+          HOME
+        </Link>
+        <h2 className="text-center">Upload Image Files to Tobsmg server</h2>
+      </div>
+      <div className="d-flex justify-content-between align-items-center px-4">
+        <form onSubmit={handleSubmit}>
+          <label className="d-block mb-3">
+            <span className="d-block mb-1">Select a file to upload</span>
+            <input className="form-control" type="file" accept="image/*" ref={imageUploadRef} />
+          </label>
+          <button type="submit" className="btn btn-success">
+            UPLOAD
+          </button>
+          {responseMsg.length ? <p>{responseMsg}</p> : null}
+        </form>
+        {uploads.length ? (
+          <div>
+            <h3 className="text-center">Uploads:</h3>
+            <ul className="navbar-nav d-flex flex-row flex-wrap gap-1">
+              {uploads.map((url) => (
+                <li key={url} className="mb-2">
+                  <img src={`${serverUrl}/img/${url}`} height={100} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </div>
   );
