@@ -6,7 +6,7 @@ import { appRouter, appRouterCaller } from "../api/router";
 import path from "path";
 
 export default function appHandler(app: Express) {
-  app.use(cors(), json({limit: "5mb"}), expressStatic(path.join(process.cwd(), "public")));
+  app.use(cors(), json({ limit: "5mb" }), expressStatic(path.join(process.cwd(), "public")));
   app.use(
     "/api",
     trpcExpress.createExpressMiddleware({
@@ -32,6 +32,6 @@ export default function appHandler(app: Express) {
   });
 
   app.get("/", (_, res) => {
-    res.sendFile("public/index.html", { root: process.cwd() });
+    res.send("Use client for uploading images");
   });
 }
