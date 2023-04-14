@@ -31,30 +31,16 @@ body {
   height: 100dvh;
 }
 
-#root {
+#root,
+.page {
   min-height: 100vh;
   min-height: 100dvh;
 }
 
 .login-page {
-  display: grid;
-  place-items: center;
   form {
     h1 {
       text-align: center;
-    }
-    label {
-      margin-bottom: 0.75rem;
-      display: block;
-
-      span {
-        display: block;
-      }
-
-      input {
-        font-size: 1.25rem;
-        padding: 0.1rem 0.4rem;
-      }
     }
   }
 }
