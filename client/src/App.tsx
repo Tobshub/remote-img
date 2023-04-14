@@ -9,6 +9,7 @@ import AuthPage from "./pages/auth";
 import clientToken from "./utils/token";
 import UploadPage from "./pages/upload";
 import IndexPage from "./pages";
+import ImagesPage from "./pages/images";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         element: <UploadPage />,
       },
       // TODO: create page to view all images
+      {
+        path: "images",
+        element: <ImagesPage />,
+      },
     ],
   },
   {
