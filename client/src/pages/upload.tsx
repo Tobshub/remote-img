@@ -56,7 +56,6 @@ export default function UploadPage() {
       </div>
       <div
         className="mx-auto d-flex justify-content-between align-items-center px-4"
-        style={{ maxWidth: 1200 }}
       >
         <form onSubmit={handleSubmit}>
           <label className="d-block mb-3">
