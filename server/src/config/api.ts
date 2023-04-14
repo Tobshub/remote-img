@@ -32,6 +32,6 @@ export default function appHandler(app: Express) {
   });
 
   app.get("/", (_, res) => {
-    res.send("Use client for uploading images");
+    res.status(200).send("Use client for uploading images");
   });
 }
