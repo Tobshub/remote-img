@@ -2,56 +2,12 @@
 <html>
 
 <head>
-  <title>Upload Image</title>
+  <title>Tobsmg</title>
 </head>
 
 <body>
   <h1>Upload Image</h1>
-  <form id="upload-form">
-    <div>
-      <label for="image-file">Image File:</label>
-      <input type="file" id="image-file" name="file" accept="image/*">
-    </div>
-    <button type="submit">Upload</button>
-  </form>
-  <div id="response"></div>
-
-  <script>
-    const form = document.getElementById('upload-form');
-    const responseDiv = document.getElementById('response');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      // Read the contents of the selected file
-      const file = document.getElementById('image-file').files[0];
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        const data = reader.result.split(',')[1];
-
-        fetch('/api/upload.permUpload', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({data, type: file.type})
-        })
-          .then(async (response) =>
-            (await response.json()).result
-          )
-          .then(({data}) => {
-            console.log(data)
-            // Display the _id value of the new image
-            responseDiv.textContent = `Image is available at /img/${data.value}`;
-          })
-          .catch((error) => {
-            console.log(error);
-            responseDiv.textContent = 'Error uploading image';
-          });
-      });
-      reader.readAsDataURL(file);
-    });
-  </script>
+  <p>To upload an image go to the <a href="tobsmg.netlify.app">Client Side</p>
 </body>
 
 </html>
