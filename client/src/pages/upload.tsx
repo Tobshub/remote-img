@@ -41,6 +41,8 @@ export default function UploadPage() {
       }
       // split removes invalid parts of the base64 string
       await uploadFileData((result as string).split(",")[1], file.type);
+      // reset file input when done
+      imageUploadRef.current ? (imageUploadRef.current.value = "") : null;
     };
     reader.readAsDataURL(file);
   };
@@ -52,7 +54,10 @@ export default function UploadPage() {
         </Link>
         <h2 className="text-center">Upload Image Files to Tobsmg server</h2>
       </div>
-      <div className="d-flex justify-content-between align-items-center px-4">
+      <div
+        className="mx-auto d-flex justify-content-between align-items-center px-4"
+        style={{ maxWidth: 1200 }}
+      >
         <form onSubmit={handleSubmit}>
           <label className="d-block mb-3">
             <span className="d-block mb-1">Select a file to upload</span>
