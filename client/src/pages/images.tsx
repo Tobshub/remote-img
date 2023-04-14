@@ -21,7 +21,9 @@ export default function ImagesPage() {
         {imgRefs.data?.pages.map((page) =>
           page.value.map((ref) => (
             <li key={ref.url} className="mb-2">
-              <img src={`${serverUrl}/img/${ref.url}`} height={250} />
+              <a target="_blank" href={`${serverUrl}/img/${ref.url}`}>
+                <img src={`${serverUrl}/img/${ref.url}`} height={250} />
+              </a>
             </li>
           ))
         ) ?? null}
