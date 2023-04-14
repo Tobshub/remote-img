@@ -1,4 +1,4 @@
-const tokenName = "tobsmote-img-token";
+const tokenName = "tobsmg-client-token";
 const clientToken = {
   set: (value: string) => {
     localStorage.setItem(tokenName, value);
