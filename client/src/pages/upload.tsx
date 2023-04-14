@@ -62,7 +62,7 @@ export default function UploadPage() {
             <span className="d-block mb-1">Select a file to upload</span>
             <input className="form-control" type="file" accept="image/*" ref={imageUploadRef} />
           </label>
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" disabled={uploadMut.isLoading}>
             UPLOAD
           </button>
           {responseMsg.length ? <p>{responseMsg}</p> : null}
