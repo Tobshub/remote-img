@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTRPCReact, httpBatchLink } from "@trpc/react-query";
-import type { AppRouter } from "@server/api/router";
+import  { type AppRouter } from "@server/api/router";
 import { PropsWithChildren } from "react";
-import { Context } from "@server/config/trpc";
+import { type Context } from "@server/config/trpc";
 import { serverUrl } from "@/data/url";
 import clientToken from "./token";
 
