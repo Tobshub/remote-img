@@ -8,7 +8,7 @@
     "dev:server": "cd server && pnpm dev",
     "dev": "concurrently \"pnpm:dev:*\"",
     "setup": "pnpm i; cd client && pnpm client:install; cd ../server && pnpm server:install; echo \"You're all set up and ready to start coding\nRun pnpm dev to start both client/ & server/ development servers\"",
-    "deploy": "./bin/deploy.sh"
+    "deploy:client": "./bin/deploy.sh"
   },
   "dependencies": {
     "concurrently": "^7.6.0"
