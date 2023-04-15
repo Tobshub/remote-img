@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { tError, tProcedure, tRouter } from "../../config/trpc";
+import { tError, tProcedure, tRouter, authProcedure } from "../../config/trpc";
 import getImgByUrl from "./controller/getByUrl";
 import getAllUrls from "./controller/getAll";
 
@@ -21,7 +21,7 @@ const retrieveRouter = tRouter({
       }
     }
   }),
-  getAll: tProcedure
+  getAll: authProcedure
     .input(z.object({ cursor: z.string().optional().nullable() }))
     .query(async ({ input }) => {
       const res = await getAllUrls({ cursor: input.cursor });
