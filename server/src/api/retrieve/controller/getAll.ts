@@ -4,7 +4,7 @@ import { Err, Ok } from "../../../helpers/result";
 
 export default async function getAllUrls(options?: { cursor?: string | null; sort?: string }) {
   try {
-    const refs = await usePrisma.reference.findMany({
+    const refs = await usePrisma.permReference.findMany({
       take: 30,
       cursor: options?.cursor ? { url: options.cursor } : undefined,
       select: { url: true },
