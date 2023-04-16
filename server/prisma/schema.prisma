@@ -14,7 +14,7 @@ model PermReference {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   imageData Bytes
   imageType String
-  url       String
+  url       String   @unique
   createdAt DateTime @default(now())
 }
 
@@ -23,6 +23,6 @@ model TempReference {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   imageData Bytes
   imageType String
-  url       String
+  url       String   @unique
   createdAt DateTime @default(now())
 }
