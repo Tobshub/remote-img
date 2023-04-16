@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "../bin/dev.sh && nodemon src/index.ts",
     "start": "node dist/index.js",
-    "build": "pnpm i && tsc",
+    "build": "pnpm i && pnpm prisma generate && tsc",
     "server:install": "pnpm i && pnpm prisma generate"
   },
   "dependencies": {
