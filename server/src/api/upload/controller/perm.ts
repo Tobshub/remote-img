@@ -6,25 +6,21 @@ import createUrl from "./url";
 export default async function permUpload(data: string, type: string) {
   try {
     const newUrl = createUrl({ isPerm: true });
-    const image = await usePrisma.image.create({
+    const image = await usePrisma.permReference.create({
       data: {
-        data: Buffer.from(data, "base64"),
-        type: type,
-        reference: { create: { url: newUrl } },
+        imageData: Buffer.from(data, "base64"),
+        imageType: type,
+        url: newUrl,
       },
-      select: { id: true, reference: { select: { url: true } } },
+      select: { url: true },
     });
 
-    if (!image || !image.reference) {
-      throw new Error(
-        `Image upload to prisma failed${
-          image && !image.reference ? ": Failed to create image reference" : ""
-        }`
-      );
+    if (!image) {
+      throw new Error("Image upload to prisma failed");
     }
 
     Log.info("Image upload successful");
-    return Ok(image.reference.url);
+    return Ok(image.url);
   } catch (err) {
     Log.error(err, "Failed to perm upload image");
     return Err("Upload failed");
