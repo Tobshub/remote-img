@@ -17,7 +17,10 @@ export default function ImagesPage() {
         HOME
       </Link>
       <h1 className="text-center">All Images</h1>
-      <ul className="navbar-nav flex-row flex-wrap justify-content-center gap-2 mx-auto" style={{maxWidth: 1200}}>
+      <ul
+        className="navbar-nav flex-row flex-wrap justify-content-center gap-2 mx-auto"
+        style={{ maxWidth: 1200 }}
+      >
         {imgRefs.data?.pages.map((page) =>
           page.value.map((ref) => (
             <li key={ref.url} className="mb-2">
