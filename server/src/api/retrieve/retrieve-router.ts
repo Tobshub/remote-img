@@ -26,7 +26,7 @@ const retrieveRouter = tRouter({
     .query(async ({ input }) => {
       const res = await getAllUrls({ cursor: input.cursor });
       if (res.ok) {
-        (res as any).nextCursor = res.value?.at(-1)?.url;
+        (res as any).nextCursor = res.value[res.value.length -1]?.url;
         return res as typeof res & { nextcursor: string };
       }
 
