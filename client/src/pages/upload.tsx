@@ -33,12 +33,12 @@ export default function UploadPage() {
     },
   });
 
-  const uploadFileData = async (data: string, type: string) => {
+  const uploadFileData = async (data: string, type: string, name: string) => {
     if (uploadType === "perm") {
-      await permUploadMut.mutateAsync({ data, type }).catch((_) => null);
+      await permUploadMut.mutateAsync({ data, type, name }).catch((_) => null);
       return;
     }
-    await tempUploadMut.mutateAsync({ data, type }).catch((_) => null);
+    await tempUploadMut.mutateAsync({ data, type, name }).catch((_) => null);
     return;
   };
 
@@ -60,7 +60,7 @@ export default function UploadPage() {
         return;
       }
       // split removes invalid parts of the base64 string
-      await uploadFileData((result as string).split(",")[1], file.type);
+      await uploadFileData((result as string).split(",")[1], file.type, file.name);
       // reset file input when done
       imageUploadRef.current ? (imageUploadRef.current.value = "") : null;
     };
