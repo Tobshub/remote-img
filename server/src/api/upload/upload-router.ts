@@ -6,9 +6,9 @@ import tempUpload from "./controller/temp";
 const uploadRouter = tRouter({
   /** Images uploaded this way are stored permanently */
   permUpload: authProcedure
-    .input(z.object({ data: z.string(), type: z.string().optional().default("image/jpg") }))
+    .input(z.object({ data: z.string(), type: z.string().default("image/jpg"), name: z.string() }))
     .mutation(async ({ input }) => {
-      const res = await permUpload(input.data, input.type);
+      const res = await permUpload(input.data, input.type, input.name);
 
       if (res.ok) return res;
 
@@ -24,10 +24,10 @@ const uploadRouter = tRouter({
     }),
   // TODO: allow user to specify duration
   /** Images uploaded this way are stored temporarily - duration specified in seconds */
-  tempUpload: tProcedure
-    .input(z.object({ data: z.string(), type: z.string() }))
+  tempUpload: authProcedure
+    .input(z.object({ data: z.string(), type: z.string(), name: z.string() }))
     .mutation(async ({ input }) => {
-      const res = await tempUpload(input.data, input.type);
+      const res = await tempUpload(input.data, input.type, input.name);
 
       if (res.ok) return res;
 

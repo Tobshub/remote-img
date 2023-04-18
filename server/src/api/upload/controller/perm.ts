@@ -3,7 +3,7 @@ import { usePrisma } from "../../../config/prisma";
 import { Err, Ok } from "../../../helpers/result";
 import createUrl from "./url";
 
-export default async function permUpload(data: string, type: string) {
+export default async function permUpload(data: string, type: string, fileName: string) {
   try {
     const newUrl = createUrl({ isPerm: true });
     const image = await usePrisma.permReference.create({
@@ -11,6 +11,7 @@ export default async function permUpload(data: string, type: string) {
         imageData: Buffer.from(data, "base64"),
         imageType: type,
         url: newUrl,
+        name: fileName
       },
       select: { url: true },
     });
