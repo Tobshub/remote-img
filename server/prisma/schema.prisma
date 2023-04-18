@@ -16,6 +16,7 @@ model PermReference {
   imageType String
   url       String   @unique
   createdAt DateTime @default(now())
+  name      String
 }
 
 // same as PermReference except is deleted after some time
@@ -25,4 +26,5 @@ model TempReference {
   imageType String
   url       String   @unique
   createdAt DateTime @default(now())
+  name      String
 }
