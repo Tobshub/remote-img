@@ -2,6 +2,7 @@ import { z } from "zod";
 import { tError, tProcedure, tRouter, authProcedure } from "../../config/trpc";
 import getImgByUrl from "./controller/getByUrl";
 import getAllUrls from "./controller/getAll";
+import filterImagesByName from "./controller/filterByName";
 
 const retrieveRouter = tRouter({
   getByUrl: tProcedure.input(z.string()).query(async ({ input }) => {
@@ -22,11 +23,13 @@ const retrieveRouter = tRouter({
     }
   }),
   getAll: authProcedure
-    .input(z.object({ cursor: z.string().optional().nullable() }))
+    .input(z.object({ query: z.string().optional(), cursor: z.string().nullish() }))
     .query(async ({ input }) => {
-      const res = await getAllUrls({ cursor: input.cursor });
+      const res = input.query
+        ? await filterImagesByName(input.query)
+        : await getAllUrls({ cursor: input.cursor });
       if (res.ok) {
-        (res as any).nextCursor = res.value[res.value.length -1]?.url;
+        (res as any).nextCursor = res.value[res.value.length - 1]?.url;
         return res as typeof res & { nextcursor: string };
       }
 
