@@ -4,8 +4,8 @@ import { Err, Ok } from "../../../helpers/result";
 
 export default async function getAllUrls(options?: { cursor?: string | null; sort?: string }) {
   try {
-    const permRefs = await usePrisma.permReference.findMany({ select: { url: true } });
-    const tempRefs = await usePrisma.tempReference.findMany({ select: { url: true } });
+    const permRefs = await usePrisma.permReference.findMany({ select: { url: true, name: true } });
+    const tempRefs = await usePrisma.tempReference.findMany({ select: { url: true, name: true } });
 
     Log.info("Success getting image refs");
     return Ok(permRefs.concat(tempRefs));
