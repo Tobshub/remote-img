@@ -2,7 +2,6 @@ import { FormEvent, useRef, useState } from "react";
 import { trpc } from "@/utils/trpc";
 import { serverUrl } from "@/data/url";
 import { Link } from "react-router-dom";
-import tempUpload from "@server/api/upload/controller/temp";
 
 export default function UploadPage() {
   const [responseMsg, setResponseMsg] = useState("");
