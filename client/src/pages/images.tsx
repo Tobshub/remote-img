@@ -1,5 +1,6 @@
 import { serverUrl } from "@/data/url";
 import { trpc } from "@/utils/trpc";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ImagesPage() {
@@ -7,6 +8,8 @@ export default function ImagesPage() {
     {},
     { getNextPageParam: (lastPage) => lastPage.nextcursor }
   );
+
+  const [imageFilter, setImageFilter] = useState("");
 
   if (!imgRefs.data) {
     return <>Loading...</>;
@@ -17,14 +20,22 @@ export default function ImagesPage() {
         HOME
       </Link>
       <h1 className="text-center">All Images</h1>
+      <form style={{ maxWidth: 500 }} className="mx-auto">
+        <label>filter images:</label>
+        <input
+          placeholder="filter query"
+          className="form-control"
+          onChange={(e) => setImageFilter(e.target.value)}
+        />
+      </form>
       <ul
         className="navbar-nav flex-row flex-wrap justify-content-center gap-2 mx-auto"
         style={{ maxWidth: 1200 }}
       >
         {imgRefs.data?.pages.map((page) =>
-          page.value.map((imageRef) => (
-            <DisplayImageComponent serverUrl={serverUrl} imageRef={imageRef} />
-          ))
+          page.value
+            .filter((imageRef) => imageRef.name.includes(imageFilter))
+            .map((imageRef) => <DisplayImageComponent serverUrl={serverUrl} imageRef={imageRef} />)
         ) ?? null}
       </ul>
     </div>
