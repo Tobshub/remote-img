@@ -22,15 +22,24 @@ export default function ImagesPage() {
         style={{ maxWidth: 1200 }}
       >
         {imgRefs.data?.pages.map((page) =>
-          page.value.map((ref) => (
-            <li key={ref.url} className="mb-2">
-              <a target="_blank" href={`${serverUrl}/img/${ref.url}`}>
-                <img src={`${serverUrl}/img/${ref.url}`} height={250} />
-              </a>
-            </li>
+          page.value.map((imageRef) => (
+            <DisplayImageComponent serverUrl={serverUrl} imageRef={imageRef} />
           ))
         ) ?? null}
       </ul>
     </div>
+  );
+}
+
+function DisplayImageComponent(props: {
+  imageRef: { url: string; name: string };
+  serverUrl: string;
+}) {
+  return (
+    <li className="mb-2">
+      <a target="_blank" href={`${props.serverUrl}/img/${props.imageRef.url}`}>
+        <img src={`${props.serverUrl}/img/${props.imageRef.url}`} height={250} />
+      </a>
+    </li>
   );
 }
