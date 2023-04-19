@@ -84,13 +84,7 @@ export default function UploadPage() {
               className="form-check-input"
               type="checkbox"
               role="switch"
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setUploadType("perm");
-                  return;
-                }
-                setUploadType("temp");
-              }}
+              onChange={(e) => setUploadType(e.target.checked ? "perm" : "temp")}
             />
             <label>Permanent Upload</label>
           </div>
