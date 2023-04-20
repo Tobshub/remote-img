@@ -1,6 +1,6 @@
 import { serverUrl } from "@/data/url";
 import { trpc } from "@/utils/trpc";
-import { PropsWithRef, Ref, useRef, useState } from "react";
+import { Ref, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ImagesPage() {
@@ -57,37 +57,48 @@ export default function ImagesPage() {
 
 function DeleteImageModal(props: { refProp: Ref<HTMLDialogElement> }) {
   const [url, setUrl] = useState("");
-  const imagePreviewRef = useRef<HTMLImageElement>(null);
   const [showPreview, setShowPreview] = useState(false);
+  const deleteImageMut = trpc.delete.withUrl.useMutation({});
 
+  //TODO: button to send delete request
   return (
-    <dialog ref={props.refProp} className="mx-auto my-auto">
-      <h3>Delete Image</h3>
-      <div className="d-flex">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setShowPreview(true);
-          }}
-        >
-          <label>URL:</label>
-          <input
-            placeholder={"x_xxxxxxxxxx"}
-            className="form-control"
-            onChange={(e) => {
-              setUrl(e.target.value);
-              setShowPreview(false);
+    <dialog
+      ref={props.refProp}
+      className={`mx-auto my-auto p-2`}
+      style={{ minWidth: "min(500px, 100%)", width: "fit-content", height: "min(350px, 100%)" }}
+    >
+      <div className="d-flex align-items-center h-100">
+        <div className="d-flex flex-column justify-content-center">
+          <h3>Delete Image</h3>
+          <form
+            className="mb-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              setShowPreview(true);
             }}
-          />
-          <button type="submit" className="btn btn-outline-danger" disabled={!url.length}>
-            search
-          </button>
-        </form>
+          >
+            <label>URL:</label>
+            <div className="input-group">
+              <input
+                placeholder={"x_xxxxxxxxxx"}
+                className="form-control"
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  setShowPreview(false);
+                }}
+              />
+              <button type="submit" className="btn btn-outline-danger" disabled={!url.length}>
+                search
+              </button>
+            </div>
+          </form>
+          <form method="dialog" className="d-flex justify-content-start align-items-center gap-2">
+            <button className="btn btn-outline-secondary">CANCEL</button>
+            {showPreview ? <button className="btn btn-danger">DELETE</button> : null}
+          </form>
+        </div>
         {showPreview ? <img src={serverUrl + "/img/" + url} height={100} /> : null}
       </div>
-      <form method="dialog">
-        <button className="btn btn-outline-secondary">CANCEL</button>
-      </form>
     </dialog>
   );
 }
