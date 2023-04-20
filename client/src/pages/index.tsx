@@ -21,8 +21,8 @@ export default function IndexPage() {
           </div>
         </div>
         <div className="d-flex flex-column">
-          <img src={Img1} style={{ maxWidth: 300, rotate: "-5deg" }} />
-          <img src={Img2} style={{ maxWidth: 300, rotate: "5deg" }} />
+          <img src={Img1} loading="lazy" style={{ maxWidth: 300, rotate: "-5deg" }} />
+          <img src={Img2} loading="lazy" style={{ maxWidth: 300, rotate: "5deg" }} />
         </div>
       </main>
     </div>
