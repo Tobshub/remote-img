@@ -1,6 +1,6 @@
 import { serverUrl } from "@/data/url";
 import { trpc } from "@/utils/trpc";
-import { Ref, useRef, useState } from "react";
+import { RefObject, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function ImagesPage() {
@@ -55,10 +55,26 @@ export default function ImagesPage() {
   );
 }
 
-function DeleteImageModal(props: { refProp: Ref<HTMLDialogElement> }) {
+function DeleteImageModal(props: { refProp: RefObject<HTMLDialogElement> }) {
   const [url, setUrl] = useState("");
   const [showPreview, setShowPreview] = useState(false);
-  const deleteImageMut = trpc.delete.withUrl.useMutation({});
+  const [responseMessage, setResponseMessage] = useState("");
+  const deleteImageMut = trpc.delete.withUrl.useMutation({
+    onSuccess(res) {
+      if (res.ok) {
+        setResponseMessage("Image deleted Successfully");
+        setTimeout(() => props.refProp.current?.close(), 500);
+      }
+    },
+    onError(err) {
+      console.error(err);
+      setResponseMessage("Failed to delete image");
+    },
+  });
+
+  const deleteImageWithUrl = async () => {
+    await deleteImageMut.mutateAsync(url).catch(() => null);
+  };
 
   //TODO: button to send delete request
   return (
@@ -70,6 +86,7 @@ function DeleteImageModal(props: { refProp: Ref<HTMLDialogElement> }) {
       <div className="d-flex align-items-center h-100">
         <div className="d-flex flex-column justify-content-center">
           <h3>Delete Image</h3>
+          {responseMessage ? <small>{responseMessage}</small> : null}
           <form
             className="mb-2"
             onSubmit={(e) => {
@@ -94,7 +111,20 @@ function DeleteImageModal(props: { refProp: Ref<HTMLDialogElement> }) {
           </form>
           <form method="dialog" className="d-flex justify-content-start align-items-center gap-2">
             <button className="btn btn-outline-secondary">CANCEL</button>
-            {showPreview ? <button className="btn btn-danger">DELETE</button> : null}
+            {showPreview ? (
+              <button
+                className="btn btn-danger"
+                type="button"
+                disabled={deleteImageMut.isLoading || !url}
+                onClick={deleteImageWithUrl}
+              >
+                {deleteImageMut.isLoading ? (
+                  <img alt="loading..." height={30} src={"https://tobsmg.onrender.com/img/p_u659o7974g"} />
+                ) : (
+                  "DELETE"
+                )}
+              </button>
+            ) : null}
           </form>
         </div>
         {showPreview ? <img src={serverUrl + "/img/" + url} height={100} /> : null}
