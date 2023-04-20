@@ -21,6 +21,7 @@ export default async function getImgByUrl(url: string) {
       return Err("Image not found");
     }
 
+    Log.info(`Image found with url: ${url}`);
     return Ok({ data: ref.imageData, type: ref.imageType });
   } catch (err) {
     Log.error(err, "Failed to get image", { url });
