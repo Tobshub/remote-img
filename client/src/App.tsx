@@ -1,5 +1,4 @@
 import {
-  LoaderFunctionArgs,
   RouterProvider,
   createBrowserRouter,
   redirect,
@@ -7,9 +6,10 @@ import {
 import { TRPCProvider } from "./utils/trpc";
 import AuthPage from "./pages/auth";
 import clientToken from "./utils/token";
-import UploadPage from "./pages/upload";
 import IndexPage from "./pages";
-import ImagesPage from "./pages/images";
+import { lazy } from "react";
+const UploadPage = lazy(() => import("./pages/upload"));
+const ImagesPage = lazy(() => import("./pages/images"));
 
 const router = createBrowserRouter([
   {
