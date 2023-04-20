@@ -1,13 +1,9 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  redirect,
-} from "react-router-dom";
+import { RouterProvider, createBrowserRouter, redirect } from "react-router-dom";
 import { TRPCProvider } from "./utils/trpc";
 import AuthPage from "./pages/auth";
 import clientToken from "./utils/token";
 import IndexPage from "./pages";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 const UploadPage = lazy(() => import("./pages/upload"));
 const ImagesPage = lazy(() => import("./pages/images"));
 
@@ -45,7 +41,15 @@ const router = createBrowserRouter([
 function App() {
   return (
     <TRPCProvider>
-      <RouterProvider router={router} />
+      <Suspense
+        fallback={
+          <div>
+            <img className="mx-auto" src={"https://tobsmg.onrender.com/img/p_u659o7974g"} height={50} />
+          </div>
+        }
+      >
+        <RouterProvider router={router} />
+      </Suspense>
     </TRPCProvider>
   );
 }
