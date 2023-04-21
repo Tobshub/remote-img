@@ -29,6 +29,7 @@ const uploadRouter = tRouter({
   tempUpload: authProcedure
     .input(z.object({ data: z.string(), type: z.string(), name: z.string() }))
     .mutation(async ({ input }) => {
+      Log.info(`Temp uploading image file ${input.name}`);
       const res = await tempUpload(input.data, input.type, input.name);
 
       if (res.ok) return res;
