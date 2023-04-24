@@ -35,12 +35,10 @@ export default function IndexPage() {
         <div className="d-flex flex-column">
           <img
             src={Img1}
-            loading="lazy"
             style={{ maxWidth: 300, rotate: "-5deg", backgroundColor: "grey" }}
           />
           <img
             src={Img2}
-            loading="lazy"
             style={{ maxWidth: 300, rotate: "5deg", backgroundColor: "grey" }}
           />
         </div>
