@@ -76,7 +76,6 @@ function DeleteImageModal(props: { refProp: RefObject<HTMLDialogElement> }) {
     await deleteImageMut.mutateAsync(url).catch(() => null);
   };
 
-  //TODO: button to send delete request
   return (
     <dialog
       ref={props.refProp}
