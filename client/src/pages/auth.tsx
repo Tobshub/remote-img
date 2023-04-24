@@ -10,6 +10,8 @@ export default function AuthPage() {
     setUser((state) => ({ ...state, [name]: value }));
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const [mutationRes, setMutationRes] = useState<string | undefined>(undefined);
 
@@ -56,12 +58,17 @@ export default function AuthPage() {
           </label>
           <label className="d-block mb-3">
             <span>Password: </span>
-            <input
-              className="form-control fs-5"
-              type="password"
-              placeholder="xxxxxx"
-              onChange={(e) => handleChange("password", e.target.value)}
-            />
+            <div className="input-group">
+              <input
+                className="form-control fs-5"
+                type={showPassword ? "text" : "password"}
+                placeholder="xxxxxx"
+                onChange={(e) => handleChange("password", e.target.value)}
+              />
+              <button type="button" className="btn btn-sm btn-outline-warning" onClick={() => setShowPassword((state) => !state)}>
+                {showPassword ? "HIDE" : "SHOW"}
+              </button>
+            </div>
           </label>
           <div>
             <button
