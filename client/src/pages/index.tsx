@@ -35,10 +35,12 @@ export default function IndexPage() {
         <div className="d-flex flex-column">
           <img
             src={Img1}
+            alt="place holder image"
             style={{ maxWidth: 300, rotate: "-5deg", backgroundColor: "grey" }}
           />
           <img
             src={Img2}
+            alt="place holder image"
             style={{ maxWidth: 300, rotate: "5deg", backgroundColor: "grey" }}
           />
         </div>
