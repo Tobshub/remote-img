@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         const intended_url = request.url;
         return redirect(`/auth?cb=${encodeURIComponent(intended_url)}`);
       }
-      return token;
+      return null;
     },
     children: [
       {
