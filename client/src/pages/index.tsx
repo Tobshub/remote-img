@@ -1,8 +1,15 @@
 import Img1 from "@/assets/rand_image_1.jpg";
 import Img2 from "@/assets/rand_image_2.jpg";
+import clientToken from "@/utils/token";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function IndexPage() {
+  const [isLoggedIn] = useState(!!clientToken.get());
+  const userSignOut = () => {
+    clientToken.remove();
+    location.reload();
+  }
   return (
     <div className="page">
       <main className="page d-flex justify-content-center align-items-center gap-4">
@@ -18,6 +25,7 @@ export default function IndexPage() {
             <Link to="/images" className="btn btn-outline-secondary">
               IMAGES
             </Link>
+            {isLoggedIn && <button className="btn btn-outline-danger" onClick={userSignOut}>SIGN OUT</button>}
           </div>
         </div>
         <div className="d-flex flex-column">
