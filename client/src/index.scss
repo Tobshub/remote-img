@@ -39,3 +39,9 @@ body {
   margin: 0 auto;
   position: relative;
 }
+
+@media (max-width: 750px) {
+  main.page {
+    flex-direction: column-reverse;
+  }
+}
