@@ -1,9 +1,10 @@
 import clientToken from "@/utils/token";
 import { trpc } from "@/utils/trpc";
 import { FormEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
 export default function AuthPage() {
+  const { success_redirect } = useLoaderData() as { success_redirect: string | null };
   const [user, setUser] = useState({ email: "", password: "" });
   const handleChange = (name: keyof typeof user, value: string) => {
     setUser((state) => ({ ...state, [name]: value }));
@@ -17,6 +18,11 @@ export default function AuthPage() {
       if (data.ok) {
         setMutationRes("Log In successful");
         clientToken.set(data.value);
+        if (success_redirect) {
+          const redirect_path = new URL(success_redirect).pathname;
+          navigate(redirect_path);
+          return;
+        }
         navigate("/upload");
       }
     },

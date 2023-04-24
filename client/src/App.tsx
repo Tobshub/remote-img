@@ -10,14 +10,20 @@ const ImagesPage = lazy(() => import("./pages/images"));
 const router = createBrowserRouter([
   {
     path: "auth",
+    loader: async ({request}) => {
+      const request_url = new URL(request.url);
+      let success_redirect = request_url.searchParams.get("cb");
+      return {success_redirect: success_redirect ? decodeURIComponent(success_redirect) : null};
+    },
     element: <AuthPage />,
   },
   {
     path: "/",
-    loader: async () => {
+    loader: async ({request}) => {
       const token = clientToken.get();
       if (!token) {
-        return redirect("/auth");
+        const intended_url = request.url;
+        return redirect(`/auth?cb=${encodeURIComponent(intended_url)}`);
       }
       return token;
     },
